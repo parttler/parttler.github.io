@@ -14,6 +14,47 @@
 
   <script src="https://dekatutorial.github.io/drk/s.js"></script>
   <link rel="stylesheet" href="https://dekatutorial.github.io/drk/s.css" />
+
+  <!-- FIX POSISI + HAPUS WATERMARK -->
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .content {
+      position: fixed !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .card {
+      margin: 0 !important;
+      cursor: pointer;
+    }
+
+    .content2 {
+      display: none;
+    }
+
+    /* === HAPUS MADE BY DEKA TUTORIAL === */
+    .credit,
+    .made,
+    .footer,
+    .made-by,
+    [class*="deka"],
+    [id*="deka"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,7 +70,7 @@
   </div>
 
   <div class="content2">
-    <div class="paper animate__animated animate__bounceIn" id="content2">
+    <div class="paper animate__animated animate__bounceIn">
       <div class="paper-content">
         <textarea class="pesan" disabled></textarea>
       </div>
@@ -42,13 +83,13 @@
 
   <script>
     var musik = "musik.mp3";
-    var background = "foto.png";
+    var background = "foto.jpg";
 
     var ucapanSurat = `sayaaangggg akuuuuu mintaaa maafff sekaaliii sameee sayaaangg
 sayaangggg akuuu banggee punyeee sayaaanggg
 semogeee sayaaanggg jugaaa banggeee yeeee sayaaangggg punyeee akuuu
 
-akuuuu udaahhh seringgg buaatt sayaaangggg keceweeee
+akuuu udaahhh seringgg buaatt sayaaangggg keceweeee
 akuuu seriinggg buaatt sayaaangggg sedeehhh
 makeee dariii ituuuu akuuu janjiii sameee djrii akuuu sendirii
 tadaakk akaann buaatt sayaaanggg sedeeeh agiii
@@ -58,17 +99,27 @@ jadiii cowooo yanggg sayaaangggg maokkk
 akuuuu maseeehh banyaakkk kuranggnyeee sayaanggggg
 akuuuu selaluuuu egoiiiss sayaaangggg
 
-sayaaangggg nantiii akuuu maokkk dengaarr perasaaannn sayaaangggg
-kesaaall, maraahhh, kecewaa
-akuuu senaangggg kalaauuu sayaaangggg nyampaaiikaann
-keluuuuhhhh kesaaahhh keee akuuu
-
 akuuu percayaaa sayaaangggg 100%
 akuuu sayaaangggg sekaaliii sameeee sayaaangggg`;
 
     var pesanWhatsapp = "dii bukaaa yeeee sayaaangggg";
 
     DekaTutorial(musik, background, ucapanSurat, pesanWhatsapp);
+
+    // klik manual (aman di Android)
+    document.querySelector(".card").addEventListener("click", function () {
+      document.querySelector(".content").style.display = "none";
+      document.querySelector(".content2").style.display = "block";
+    });
+
+    // FORCE HAPUS WATERMARK (kalau muncul lagi)
+    setTimeout(() => {
+      document.querySelectorAll("div, p, span").forEach(el => {
+        if (el.innerText && el.innerText.toLowerCase().includes("deka")) {
+          el.remove();
+        }
+      });
+    }, 500);
   </script>
 
 </body>
